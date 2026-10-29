@@ -3,23 +3,23 @@ import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { LanguageProvider } from '@/src/context/language-context'
-import { GoldenParticles } from '@/src/components/ui/golden-particles'
 import './globals.css'
 
-const _inter = Inter({ subsets: ["latin"] });
-const _jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin", "latin-ext"], variable: '--font-inter', display: 'swap' });
+const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: '--font-jetbrains', display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'Adin Brkic | Software Engineer',
-  description: 'Software Engineer specializing in systems programming, simulations, and web engineering. View my portfolio with interactive 3D elements and explore my projects.',
+  metadataBase: new URL('https://adinbrkic.netlify.app'),
+  title: 'Adin Brkić | Software Engineering Portfolio',
+  description: 'Software Engineering student at IUS, building practical web applications and looking for an internship. Explore Lens Caffe System, gradanski.ba and independent projects.',
+  alternates: { canonical: '/' },
   keywords: ['software engineer', 'web developer', 'systems programming', 'React', 'Next.js', 'portfolio'],
   authors: [{ name: 'Adin Brkic' }],
   openGraph: {
-    title: 'Adin Brkic | Software Engineer',
-    description: 'Software Engineer specializing in systems programming, simulations, and web engineering.',
+    title: 'Adin Brkić | Software Engineering Portfolio',
+    description: 'Practical web applications, systems projects and independent publishing. Open to software development internships.',
     type: 'website',
   },
-  generator: 'v0.app',
   icons: {
     icon: [
       {
@@ -46,8 +46,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
-        <GoldenParticles />
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <LanguageProvider>
           {children}
         </LanguageProvider>

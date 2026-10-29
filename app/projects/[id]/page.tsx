@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   return {
     title: `${project.title} | Adin Brkic`,
     description: project.description,
+    alternates: { canonical: `/projects/${id}` },
   };
 }
 

@@ -1,48 +1,22 @@
 export const personalInfo = {
-  name: "Adin Brkic",
-  title: "Software Engineer",
-  tagline: "Building systems that actually matter",
-  bio: `I specialize in systems programming, simulations, and web engineering. 
-My background in management and hospitality gives me a unique eye for 
-user experience and business needs.`,
-  location: "Bosnia and Herzegovina",
-  email: "adin.brkic0302@gmail.com",
+  name: 'Adin Brkić',
+  title: 'Software Engineering Student',
+  tagline: 'Turning real problems into useful software',
+  bio: 'Software Engineering student at IUS with a minor in Management. I build practical web applications, manage a café and own gradanski.ba. Open to software development internships.',
+  location: 'Bosnia and Herzegovina',
+  email: 'adin.brkic0302@gmail.com',
   available: true,
-  funFact: "Football enthusiast when not coding",
+  funFact: 'Football enthusiast when not coding',
 };
-
-/** Full intro for the portfolio page and AI chatbot (shown at top of chat). */
-export const portfolioIntro = `Hey! I'm Adin — a software engineer who builds practical projects and enjoys solving real problems. I'm in my third year at IUS, studying Software Engineering with a minor in Management.
-
-I've got experience with web development (Next.js, React, TypeScript) and low-level programming (C, MIPS Assembly). When I'm not coding, I manage a café — which taught me a lot about what people actually want from technology.
-
-I'm 21, motivated, and always eager to take on new challenges. Currently working on expanding my digital skills to build better user experiences.`;
-
-/** Lead text: what the user can ask (shown right after intro). */
-export const portfolioLead = `Feel free to ask about my projects, what I enjoy building, or how we can work together.`;
-
+export const portfolioIntro = `Hi! I’m Adin’s portfolio assistant. Adin studies Software Engineering at IUS with a minor in Management and is looking for a software development internship. He builds practical web applications, manages a café and owns gradanski.ba. Ask about Lens Caffe System, his other projects, skills or contact details.`;
+export const portfolioIntroBs = `Zdravo! Ja sam Adinov portfolio asistent. Adin studira softversko inženjerstvo na IUS-u uz minor iz menadžmenta i traži praksu u razvoju softvera. Razvija praktične web aplikacije, vodi kafić i vlasnik je portala gradanski.ba. Pitaj za Lens Caffe System, ostale projekte, vještine ili kontakt.`;
+export const portfolioLead = 'Explore the projects or get in touch by email.';
 export const socialLinks = [
-  {
-    name: "Email",
-    href: "mailto:adin.brkic0302@gmail.com",
-    label: "adin.brkic0302@gmail.com",
-  },
-  {
-    name: "GitHub",
-    href: "https://github.com/Brega0302",
-    label: "github.com/Brega0302",
-  },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/adin-brkic-6971472b8/",
-    label: "linkedin.com/in/adin-brkic",
-  },
+ { name: 'Email', href: 'mailto:adin.brkic0302@gmail.com', label: 'adin.brkic0302@gmail.com' },
+ { name: 'GitHub', href: 'https://github.com/Brega0302', label: 'github.com/Brega0302' },
+ { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adin-brkic-6971472b8/', label: 'linkedin.com/in/adin-brkic' },
 ];
-
 export const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Terminal", href: "#terminal" },
-  { name: "Contact", href: "#contact" },
+ { name: 'About', href: '#about' }, { name: 'Projects', href: '#projects' },
+ { name: 'Skills', href: '#skills' }, { name: 'Chat', href: '#terminal' }, { name: 'Contact', href: '#contact' },
 ];

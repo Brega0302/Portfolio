@@ -15,16 +15,18 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
 
   useEffect(() => {
-    const saved = localStorage.getItem("language") as Language;
-    if (saved && (saved === "en" || saved === "bs")) {
-      setLanguageState(saved);
-    }
+    try {
+      const saved = localStorage.getItem("language");
+      if (saved === "en" || saved === "bs") setLanguageState(saved);
+    } catch { /* The language switch still works when storage is unavailable. */ }
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("language", lang);
+    try { localStorage.setItem("language", lang); } catch { /* Optional persistence. */ }
   };
+
+  useEffect(() => { document.documentElement.lang = language; }, [language]);
 
   const t = translations[language];
 

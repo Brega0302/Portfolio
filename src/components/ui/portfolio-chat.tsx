@@ -4,10 +4,9 @@ import { useChat } from "@ai-sdk/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, Send, User, Sparkles, Code, Mail, Briefcase } from "lucide-react";
 import { useLanguage } from "@/src/context/language-context";
-import { portfolioIntro, portfolioLead } from "@/src/data/personal";
+import { portfolioIntro, portfolioIntroBs } from "@/src/data/personal";
 import { cn } from "@/lib/utils";
 
-const WELCOME_MESSAGE = `${portfolioIntro}\n\n${portfolioLead}`;
 
 function getMessageText(message: { content?: string; parts?: Array<{ type: string; text?: string }> }): string {
   if (message.parts?.length) {
@@ -20,11 +19,13 @@ function getMessageText(message: { content?: string; parts?: Array<{ type: strin
 }
 
 export function PortfolioChat() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isBs = language === 'bs';
   const { messages, append, input, setInput, status, error } = useChat({
     api: "/api/chat",
+    body: { language },
     initialMessages: [
-      { id: "welcome", role: "assistant", content: WELCOME_MESSAGE },
+      { id: "welcome", role: "assistant", content: isBs ? portfolioIntroBs : portfolioIntro },
     ],
   });
 
@@ -33,26 +34,26 @@ export function PortfolioChat() {
   const quickActions = [
     {
       icon: Sparkles,
-      text: "About Adin",
-      message: "Tell me about Adin",
+      text: isBs ? 'O Adinu' : 'About Adin',
+      message: isBs ? 'Reci mi nešto o Adinu' : 'Tell me about Adin',
       color: "from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30",
     },
     {
       icon: Code,
-      text: "Projects",
-      message: "What projects has Adin built?",
+      text: isBs ? 'Projekti' : 'Projects',
+      message: isBs ? 'Koji su Adinovi projekti?' : 'What projects has Adin built?',
       color: "from-green-500/20 to-emerald-500/20 hover:from-green-500/30 hover:to-emerald-500/30",
     },
     {
       icon: Briefcase,
-      text: "Skills",
-      message: "What are Adin's technical skills?",
+      text: isBs ? 'Vještine' : 'Skills',
+      message: isBs ? 'Koje tehnologije Adin koristi?' : 'What are Adin’s technical skills?',
       color: "from-orange-500/20 to-red-500/20 hover:from-orange-500/30 hover:to-red-500/30",
     },
     {
       icon: Mail,
-      text: "Contact",
-      message: "How can I contact Adin?",
+      text: isBs ? 'Kontakt' : 'Contact',
+      message: isBs ? 'Kako mogu kontaktirati Adina?' : 'How can I contact Adin?',
       color: "from-pink-500/20 to-rose-500/20 hover:from-pink-500/30 hover:to-rose-500/30",
     },
   ];
@@ -80,12 +81,12 @@ export function PortfolioChat() {
           </div>
           <span className="font-mono text-xs text-primary ml-2 flex items-center gap-2">
             <Bot className="w-4 h-4" />
-            {t.chat?.cardTitle ?? "AI Assistant"}
+            {isBs ? 'Portfolio asistent' : 'Portfolio assistant'}
           </span>
         </div>
 
         {/* Messages */}
-        <div className="bg-background p-4 h-96 overflow-y-auto font-mono text-sm flex flex-col gap-4">
+        <div role="log" aria-label={isBs ? 'Razgovor s asistentom' : 'Conversation with assistant'} aria-live="polite" className="bg-background p-4 h-80 overflow-y-auto font-mono text-sm flex flex-col gap-4">
           <AnimatePresence>
             {messages.map((message) => (
               <motion.div
@@ -138,9 +139,9 @@ export function PortfolioChat() {
           )}
           {error && (
             <div className="rounded-xl bg-amber-500/10 border border-amber-500/20 px-4 py-3 text-sm text-amber-700 dark:text-amber-400">
-              <p className="font-medium">Something went wrong.</p>
+              <p className="font-medium">{isBs ? 'Poruka nije poslana.' : 'Message could not be sent.'}</p>
               <p className="mt-1 text-muted-foreground">
-                Try asking something simple: &quot;What are Adin&apos;s skills?&quot; or &quot;How can I contact?&quot;
+                {isBs ? 'Pokušaj ponovo ili se javi putem emaila.' : 'Try again or get in touch by email.'}
               </p>
             </div>
           )}
@@ -182,11 +183,13 @@ export function PortfolioChat() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={t.chat?.inputPlaceholder ?? "Ask about projects, skills, contact..."}
+            aria-label={isBs ? 'Pitaj o Adinovim projektima' : 'Ask about Adin’s projects'}
             className="flex-1 bg-background border border-primary/20 rounded-xl px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-primary/30"
             disabled={isLoading}
           />
           <motion.button
             type="submit"
+            aria-label={isBs ? 'Pošalji poruku' : 'Send message'}
             disabled={!input.trim() || isLoading}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}

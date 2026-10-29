@@ -1,35 +1,10 @@
+import { fileURLToPath } from 'node:url';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
-  devIndicators: {
-    appIsrStatus: false,
-    buildActivity: false,
-    buildActivityPosition: 'bottom-right',
-  },
-  logging: {
-    fetches: {
-      fullUrl: false,
-    },
-  },
-  experimental: {
-    logging: {
-      level: 'error',
-    },
-  },
-  // Network configuration for development
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'http://localhost:3000/api/:path*',
-      },
-    ];
-  },
-}
-
-export default nextConfig
+  images: { unoptimized: true },
+  devIndicators: false,
+  turbopack: { root: fileURLToPath(new URL('.', import.meta.url)) },
+  outputFileTracingRoot: fileURLToPath(new URL('.', import.meta.url)),
+};
+export default nextConfig;

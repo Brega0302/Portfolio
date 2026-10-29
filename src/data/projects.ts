@@ -19,6 +19,30 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "lens-caffe-system",
+    title: "Lens Caffe System",
+    description: "A full-stack café management application. Work in progress — actively developing and improving.",
+    longDescription: "LensOS connects warehouse stock, purchasing, warehouse-to-café transfers and a two-shift daily sales ledger. This ongoing personal project is based on practical café workflows; it is not a finished production release.",
+    problem: "Warehouse stock, goods in the café and shift counts need to stay connected so that daily sales can be calculated consistently.",
+    solution: "React and TypeScript interfaces backed by Express, PostgreSQL and Prisma. Implemented owner authentication, transactional stock updates, low-stock alerts and a ledger that calculates sales from opening counts, transfers and closing counts.",
+    learned: "Working with relational data, transactions, historical pricing, session authentication and automated tests. Further work includes waiter permissions, write-offs, reporting and deployment hardening.",
+    technologies: ["React", "TypeScript", "Express", "PostgreSQL", "Prisma", "Vitest", "Playwright"],
+    category: "fullstack", color: "from-emerald-800 to-stone-700", featured: true,
+    links: { github: "https://github.com/Brega0302/Lens-Caffe-System" },
+  },
+  {
+    id: "gradanski",
+    title: "gradanski.ba",
+    description: "My independent online news portal and digital publishing project.",
+    longDescription: "gradanski.ba is my independent online news portal. It brings together my interests in digital publishing and building an online presence.",
+    problem: "Developing an independent digital publishing project with a clear identity and an accessible online presence.",
+    solution: "Own and run gradanski.ba as a personal online news portal.",
+    learned: "Practical experience with an independent digital project and the relationship between content and its presentation on the web.",
+    technologies: ["Digital publishing", "News & media"], category: "web",
+    color: "from-stone-600 to-amber-700", featured: true,
+    links: { live: "https://gradanski.ba" },
+  },
+  {
     id: "lens-caffe-qr-menu",
     title: "Lens Caffe QR Menu",
     description:

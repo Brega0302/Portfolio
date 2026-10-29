@@ -148,12 +148,12 @@ export const floatingRotate = {
 };
 
 // Continuous rotation
-export const rotate360: Transition = {
+export const rotate360 = {
   rotate: 360,
   transition: {
     duration: 4,
     repeat: Infinity,
-    ease: "linear",
+    ease: "linear" as const,
   },
 };
 
