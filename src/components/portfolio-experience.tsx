@@ -13,7 +13,7 @@ const linkedin = 'https://www.linkedin.com/in/adin-brkic-6971472b8/';
 const words = {
   en: {
     nav: ['About', 'Work', 'Skills', 'Chat', 'Contact'], available: 'Open to internship opportunities',
-    role: 'SOFTWARE ENGINEERING STUDENT', hello: 'Hi, I’m Adin.', headline: 'Turning real problems', accent: 'into useful software.',
+    role: 'SOFTWARE ENGINEERING STUDENT', hello: 'Hi, I’m Adin Brega Brkic.', headline: 'Turning real problems', accent: 'into useful software.',
     intro: 'I build web applications, explore how systems work, and bring a business perspective from managing a café. Currently looking for a software development internship.',
     work: 'Explore my work', contact: 'Let’s talk', location: 'Bosnia & Herzegovina', studying: 'Software Engineering · IUS', minor: 'Minor in Management',
     portrait: 'A little curiosity. A lot of building.', focus: 'CURRENT FOCUS', focusText: 'Full-stack development & reliable software',
@@ -33,7 +33,7 @@ const words = {
   },
   bs: {
     nav: ['O meni', 'Projekti', 'Vještine', 'Chat', 'Kontakt'], available: 'Otvoren za internship prilike',
-    role: 'STUDENT SOFTVERSKOG INŽENJERSTVA', hello: 'Zdravo, ja sam Adin.', headline: 'Stvarne probleme', accent: 'pretvaram u softver.',
+    role: 'STUDENT SOFTVERSKOG INŽENJERSTVA', hello: 'Zdravo, ja sam Adin Brega Brkic.', headline: 'Stvarne probleme', accent: 'pretvaram u softver.',
     intro: 'Razvijam web aplikacije, istražujem kako sistemi rade i donosim poslovnu perspektivu iz vođenja kafića. Trenutno tražim praksu u razvoju softvera.',
     work: 'Pogledaj projekte', contact: 'Razgovarajmo', location: 'Bosna i Hercegovina', studying: 'Softversko inženjerstvo · IUS', minor: 'Minor iz menadžmenta',
     portrait: 'Radoznalost koja vodi do novih projekata.', focus: 'TRENUTNI FOKUS', focusText: 'Full-stack razvoj i pouzdan softver',
@@ -88,9 +88,19 @@ export function PortfolioExperience() {
   };
 
   return <div className="portfolio">
+    <div className="ambient-background" aria-hidden="true">
+      <div className="ambient-grid"/>
+      <div className="ambient-glow ambient-glow-one"/>
+      <div className="ambient-glow ambient-glow-two"/>
+      <svg className="ambient-orbits" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="orbit-gold" x1="0" y1="1" x2="1" y2="0"><stop stopColor="#d9b975" stopOpacity="0"/><stop offset=".55" stopColor="#d9b975" stopOpacity=".35"/><stop offset="1" stopColor="#d9b975" stopOpacity="0"/></linearGradient></defs>
+        <g fill="none" stroke="url(#orbit-gold)"><ellipse cx="1170" cy="320" rx="490" ry="210" transform="rotate(-28 1170 320)"/><ellipse cx="1170" cy="320" rx="610" ry="310" transform="rotate(-28 1170 320)"/><ellipse cx="1170" cy="320" rx="740" ry="410" transform="rotate(-28 1170 320)"/></g>
+        <g fill="#e6c88b"><circle cx="810" cy="170" r="2"/><circle cx="1300" cy="540" r="2"/><circle cx="580" cy="650" r="1.5"/></g>
+      </svg>
+    </div>
     <a href="#main-content" className="skip-link">{language === 'en' ? 'Skip to content' : 'Preskoči na sadržaj'}</a>
     <header className="site-header"><div className="shell nav-bar">
-      <a href="#top" className="brand" aria-label="Adin Brkić — home"><Image src="/images/logo.png" alt="" width={38} height={38}/><span>adin<span className="gold">.</span></span></a>
+      <a href="#top" className="brand" aria-label="Adin Brega Brkic — home"><Image src="/images/logo.png" alt="" width={38} height={38}/><span className="brand-fullname">Adin <span className="gold">Brega</span> Brkic</span></a>
       <nav className="desktop-nav" aria-label={language === 'en' ? 'Main navigation' : 'Glavna navigacija'}>{anchors.map((id,i) => <a href={`#${id}`} key={id}>{c.nav[i]}</a>)}</nav>
       <div className="nav-actions"><div className="language-control" aria-label={language === 'en' ? 'Language' : 'Jezik'}>{(['en','bs'] as const).map(lang => <button key={lang} aria-pressed={language === lang} onClick={() => { setLanguage(lang); setCopyState('idle'); }}>{lang.toUpperCase()}</button>)}</div><a className="nav-contact" href="#contact">{c.contact}<ArrowUpRight size={15}/></a><button className="menu-toggle" aria-label={menuOpen ? c.close : c.menu} aria-expanded={menuOpen} aria-controls="mobile-nav" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button></div>
     </div>{menuOpen && <nav id="mobile-nav" className="mobile-nav shell" aria-label={language === 'en' ? 'Mobile navigation' : 'Mobilna navigacija'}>{anchors.map((id,i) => <a href={`#${id}`} key={id} onClick={() => setMenuOpen(false)}>{c.nav[i]}<ArrowUpRight size={17}/></a>)}</nav>}</header>

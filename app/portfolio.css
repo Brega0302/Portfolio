@@ -288,3 +288,19 @@ a { text-decoration:none; }
 .detail-footer { display:flex; justify-content:space-between; gap:20px; border-top:1px solid #ffffff15; padding-top:30px; margin-top:20px; }
 @media (max-width:800px) { .hero-intro { font-size:13px; } .project-content { padding:24px; } .project-content h3 { font-size:21px; } .project-content > p { font-size:12px; } .project-category { font-size:8px; } .project-actions { gap:15px; } .project-actions a { font-size:11px; } }
 @media (max-width:600px) { .hero h1 { font-size:clamp(31px,8.4vw,48px); } .hero-intro { font-size:14px; } .project-content h3 { font-size:23px; } .project-content > p { font-size:13px; } .work-card > p { font-size:13px; } .project-filters { gap:5px; } .project-filters button { font-size:10px; padding-inline:10px; } .detail-main { padding-block:40px; } .detail-intro { font-size:15px; } .detail-heading { gap:13px; } .detail-sections section { grid-template-columns:25px 1fr; gap:15px; padding-block:27px; } .detail-sections h2 { font-size:19px; } .detail-sections p { font-size:13px; } .detail-footer { flex-wrap:wrap; } }
+/* Quiet orbital background behind the content. */
+.portfolio { position:relative; isolation:isolate; background:#0e1012; }
+.portfolio > main,.portfolio > footer { position:relative; z-index:1; }
+.ambient-background { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.ambient-grid { position:absolute; inset:0; background-image:linear-gradient(#d9b97507 1px,transparent 1px),linear-gradient(90deg,#d9b97507 1px,transparent 1px); background-size:80px 80px; mask-image:linear-gradient(#0009,transparent 85%); }
+.ambient-glow { position:absolute; width:850px; height:850px; border-radius:50%; will-change:transform; }
+.ambient-glow-one { right:-260px; top:-280px; background:radial-gradient(ellipse,#c99e4a24 0%,#ac843810 35%,transparent 68%); animation:ambient-drift 27s ease-in-out infinite alternate; }
+.ambient-glow-two { left:-380px; top:380px; width:1000px; height:850px; background:radial-gradient(ellipse,#73856818 0%,#4c62500a 40%,transparent 68%); animation:ambient-drift 34s ease-in-out infinite alternate-reverse; }
+.ambient-orbits { position:absolute; inset:0; width:100%; height:100%; opacity:.44; }
+.brand-fullname { font-size:19px; letter-spacing:-.5px; white-space:nowrap; font-weight:550; }
+.hero-greeting { line-height:1.5; }
+@keyframes ambient-drift { from { transform:translate3d(0,0,0) scale(1); } to { transform:translate3d(-75px,65px,0) scale(1.15); } }
+@media (max-width:1000px) { .desktop-nav,.nav-contact { display:none; } .menu-toggle { display:flex; } }
+@media (max-width:600px) { .brand-fullname { font-size:14px; letter-spacing:-.35px; } .brand { gap:8px; } .nav-actions { gap:12px; } .ambient-grid { background-size:55px 55px; } .ambient-orbits { opacity:.25; } .ambient-glow-one { width:650px; height:700px; right:-330px; top:-150px; } .ambient-glow-two { left:-600px; } .hero-greeting { font-size:17px; } }
+@media (prefers-reduced-motion:reduce) { .ambient-glow { animation:none; will-change:auto; } }
+@media (max-width:600px) { .nav-bar { gap:12px; } }
