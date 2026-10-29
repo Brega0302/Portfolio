@@ -1,6 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
+import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, Send, User, Sparkles, Code, Mail, Briefcase } from "lucide-react";
 import { useLanguage } from "@/src/context/language-context";
@@ -21,7 +22,8 @@ function getMessageText(message: { content?: string; parts?: Array<{ type: strin
 export function PortfolioChat() {
   const { t, language } = useLanguage();
   const isBs = language === 'bs';
-  const { messages, append, input, setInput, status, error } = useChat({
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { messages, setMessages, append, input, setInput, status, error, reload } = useChat({
     api: "/api/chat",
     body: { language },
     initialMessages: [
@@ -30,6 +32,16 @@ export function PortfolioChat() {
   });
 
   const isLoading = status === "submitted" || status === "streaming";
+
+  useEffect(() => {
+    setMessages(previous => previous.map(message => message.id === 'welcome'
+      ? { ...message, content: isBs ? portfolioIntroBs : portfolioIntro } : message));
+  }, [isBs, setMessages]);
+
+  useEffect(() => {
+    const log = scrollRef.current;
+    if (log) log.scrollTop = log.scrollHeight;
+  }, [messages, status]);
 
   const quickActions = [
     {
@@ -86,7 +98,7 @@ export function PortfolioChat() {
         </div>
 
         {/* Messages */}
-        <div role="log" aria-label={isBs ? 'Razgovor s asistentom' : 'Conversation with assistant'} aria-live="polite" className="bg-background p-4 h-80 overflow-y-auto font-mono text-sm flex flex-col gap-4">
+        <div ref={scrollRef} role="log" aria-label={isBs ? 'Razgovor s asistentom' : 'Conversation with assistant'} aria-live="polite" className="bg-background p-4 h-80 overflow-y-auto font-mono text-sm flex flex-col gap-4">
           <AnimatePresence>
             {messages.map((message) => (
               <motion.div
@@ -111,7 +123,14 @@ export function PortfolioChat() {
                       : "bg-secondary border border-primary/10 text-muted-foreground"
                   )}
                 >
-                  {getMessageText(message)}
+                  {getMessageText(message).split(/(https?:\/\/[^\s]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g).map((part, index) => {
+                    if (/^https?:\/\//.test(part)) {
+                      const url = part.replace(/[.,;!?)]+$/, '');
+                      return <a key={index} className="chat-link" href={url} target="_blank" rel="noopener noreferrer">{url}</a>;
+                    }
+                    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(part)) return <a key={index} className="chat-link" href={`mailto:${part}`}>{part}</a>;
+                    return part;
+                  })}
                 </div>
                 {message.role === "user" && (
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
@@ -143,6 +162,7 @@ export function PortfolioChat() {
               <p className="mt-1 text-muted-foreground">
                 {isBs ? 'Pokušaj ponovo ili se javi putem emaila.' : 'Try again or get in touch by email.'}
               </p>
+              <button type="button" className="chat-retry" onClick={() => reload()} disabled={isLoading}>{isBs ? 'Pokušaj ponovo' : 'Try again'}</button>
             </div>
           )}
         </div>
